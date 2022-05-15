@@ -21,9 +21,9 @@ The construction of this image is defined by `Dockerfile`.
 
 ## 3. Create a container from the Docker Image
 
-Create and start (`docker run`) a detached (`-d`) Docker container called sklearn-flask-docker (`--name sklearn-flask-docker`) from the image `rafalkaliszczuk/sklearn-flask-docker:latest` where port of the host machine is connected to port 5001 of the Docker container (`-p 3000:3333`).
+Create and start (`docker run`) a detached (`-d`) Docker container called sklearn-flask-docker (`--name sklearn-flask-docker`) from the image `rafalkaliszczuk/sklearn-flask-docker:latest` where port of the host machine is connected to port 5001 of the Docker container.
 
-`docker run -p 3000:3333 -d --name sklearn-flask-docker rafalkaliszczuk/sklearn-flask-docker:latest`
+`docker run -d --name sklearn-flask-docker rafalkaliszczuk/sklearn-flask-docker:latest`
 
 ## 4. Query the prediction API with an example observation
 
