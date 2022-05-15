@@ -1,33 +1,31 @@
-from flask import Flask, request
-import numpy as np
+from flask import Flask, request, jsonify
 import pickle
-
 
 app = Flask(__name__)
 
-@app.route('/predict')
+@app.route('/')
+def home():
+    return "Hi, Welcome to Flask!!"
+
+@app.route('/predict', methods=['GET'])
 def predict():
 
-	sep_len = request.args['sepal_length']
-	sep_wid = request.args['sepal_width']
-	pet_len = request.args['petal_length']
-	pet_wid = request.args['petal_width']
-	
-	test_data = np.array([sep_len, sep_wid, pet_len, pet_wid]).reshape(1,4)
-	class_prediced = int(perceptron_model.predict(test_data)[0])
-	output = "Predicted Iris Class: " + str(class_prediced)
-	
-	return (output)
+    sep_len = float(request.args.get('sepal_length'))
+    sep_wid = float(request.args.get('sepal_width'))
+    pet_len = float(request.args.get('petal_length'))
+    pet_wid = float(request.args.get('petal_width'))
+    
+    
+    test_data = [sep_len, sep_wid, pet_len, pet_wid]
+    
+    perceptron_file = open('model.pkl', 'rb')
+    perceptron = pickle.load(perceptron_file)
+    perceptron_file.close()
+    
+    #/predict?sepal_length=4.5&sepal_width=2.3&petal_length=1.3&petal_width=0.3
+    prediction = int(perceptron.predict([test_data]))
 
-def load_model():
-	global perceptron_model
-	
-	perceptron_file = open('model.pkl', 'rb')
-	perceptron_model = pickle.load(perceptron_model)
-	perceptron_file.close()
+    return jsonify(features=test_data, predicted_class=prediction)
 
 if __name__ == "__main__":
-	
-	load_model()
-	
-    app.run()
+    app.run(port=5001)
