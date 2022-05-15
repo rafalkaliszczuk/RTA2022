@@ -9,7 +9,10 @@ iris=load_iris()
 df = pd.DataFrame(data = np.c_[iris['data'], iris['target']], 
                   columns=iris['feature_names']+['target'])
 
-#Define Perceptron class
+X = iris.data[:100]
+y = iris.target[:100]
+
+# Define Perceptron class
 
 class Perceptron:
     def __init__(self, eta=0.01, n_iter=10):
@@ -31,6 +34,7 @@ class Perceptron:
     
     
     def net_input(self, X):
+        X = np.squeeze(np.asarray(X))
         return np.dot(X, self.w_[1:]) + self.w_[0]
     
     def predict(self, X):
@@ -38,18 +42,12 @@ class Perceptron:
 
 # Perceptron classifier
 
-X = iris['data']
-y = iris['target']
-perceptron_model = Perceptron()
-perceptron_model.fit(X, y)
+perceptron = Perceptron()
+
+perceptron.fit(X, y)
 
 # Save your model
-pickle.dump(perceptron_model, 'model.pkl')
 
-perceptron_file = open('SVMModel.pckl', 'wb')
-pickle.dump(perceptron_model, perceptron_file)
+perceptron_file = open('model.pkl', 'wb')
+pickle.dump(perceptron, perceptron_file)
 perceptron_file.close()
-
-# Load the model that you just saved
-lr = joblib.load('model.pkl')
-
