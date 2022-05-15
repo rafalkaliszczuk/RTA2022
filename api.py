@@ -39,4 +39,4 @@ def predict():
 
 if __name__ == "__main__":
     # Run the app at 0.0.0.0:3333
-    app.run(port=3333,host='0.0.0.0')
+    app.run(port=5001)
