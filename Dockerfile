@@ -3,9 +3,6 @@
 # From the source image
 FROM python:3.6-slim
 
-# Identify maintainer
-LABEL maintainer = "rafalkaliszczuk@gmail.com"
-
 # Set the default working directory
 WORKDIR /app/
 
