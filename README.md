@@ -1,5 +1,5 @@
 # sklearn-flask-docker
-An example of deploying a sklearn model using Flask API and a Docker container.
+An example of deploying a sklearn model using Flask API and a Docker container. 
 
 ## Steps:
 
