@@ -11,7 +11,7 @@ app = Flask(__name__)
 # Create an API end point
 @app.route('/')
 def home():
-    return "Hi, Welcome to Flask!!"
+    return "Hi, Welcome to Flask!!" 
 
 @app.route('/predict', methods=['GET'])
 def predict():
